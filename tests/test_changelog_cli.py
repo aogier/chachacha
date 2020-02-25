@@ -8,10 +8,6 @@ from chachacha import __version__, main
 from chachacha.drivers.kac import DEFAULT_HEADER
 
 
-def test_version():
-    assert __version__ == "0.1.0"
-
-
 def test_release_major(tmp_path):
     os.chdir(tmp_path)
     runner = CliRunner()
