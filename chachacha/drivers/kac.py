@@ -73,7 +73,8 @@ class ChangelogFormat:
         _changelog_line = "- " + " ".join(changelog_line)
         current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
-        if "Unreleased" not in current:
+        unreleased = current.get("Unreleased")
+        if not unreleased:
             unreleased = {"Unreleased": {"version": "Unreleased", "release_date": None}}
 
             new = {}
@@ -81,13 +82,7 @@ class ChangelogFormat:
             new.update(current)
 
             current = new
-
-        else:
             unreleased = current["Unreleased"]
-
-        unreleased = current.setdefault(
-            "Unreleased", {"version": "Unreleased", "release_date": None}
-        )
 
         section = unreleased.setdefault(section_name, [])
 
