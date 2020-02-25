@@ -4,7 +4,10 @@
 [![codecov](https://codecov.io/gh/aogier/chachacha/branch/master/graph/badge.svg)](https://codecov.io/gh/aogier/chachacha)
 [![Package version](https://badge.fury.io/py/chachacha.svg)](https://pypi.org/project/chachacha)
 
-Chachacha changes changelogs.
+Chachacha changes changelogs. This is a tool you can use to keep your changelog tidy,
+for now it only supports the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+specification but the tool's architecture is plugin-based so expect other formats
+and/or contribute by yourself what matters! Yay!
 
 ## Installation
 
@@ -52,9 +55,9 @@ Commands:
   security    add a "security" entry
 ```
 
-Please note that KeepAChangelog format is a plugin, and implementing other
-formats is planned. KAC format driver heavily depends on Colin Bounouar's
-[keepachangelog library](https://github.com/Colin-b/keepachangelog).
+Once again please note that KeepAChangelog format is a plugin, and
+implementing other formats is planned/expected. KAC format driver heavily
+depends on Colin Bounouar's [keepachangelog library](https://github.com/Colin-b/keepachangelog).
 
 Releasing a version is simple as:
 
@@ -78,5 +81,5 @@ Where:
 * minor: release a minor
 * patch: release a patch
 
-Specification on this behavious is directly taken from [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+Specification on this behaviour is directly taken from [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 thanks to python [semver library](https://python-semver.readthedocs.io/en/latest/).
