@@ -61,11 +61,10 @@ Usage: chachacha release [OPTIONS]
   release a version
 
 Options:
-  --major  overwrite
-  --minor  overwrite
-  --patch  overwrite
+  --major  bump a major version
+  --minor  bump a minor version
+  --patch  bump a patch version
   --help   Show this message and exit.
-
 ```
 
 Where:
