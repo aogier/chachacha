@@ -8,6 +8,11 @@ Chachacha changes changelogs.
 
 ## Installation
 
+Grab latest copy from [releases page](https://github.com/aogier/chachacha/releases)
+and place it where you can invoke it.
+
+Alternatively you can choose to install Python package and cope with `$PATH` configuration.
+
 ```console
 $ pip install chachacha
 
