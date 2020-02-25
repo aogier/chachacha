@@ -13,7 +13,27 @@ from chachacha import drivers
 from chachacha.drivers.kac import ChangelogFormat
 
 
-@click.group()
+class CCCGroup(click.Group):
+    def __init__(self, *args, **kwargs):
+        self.help_priorities = {}
+        super().__init__(*args, **kwargs)
+
+    def get_help(self, ctx):
+        self.list_commands = self.list_commands_for_help
+        return super().get_help(ctx)
+
+    def list_commands_for_help(self, ctx):
+        """reorder the list of commands when listing the help"""
+        commands = (
+            command
+            for command in super().list_commands(ctx)
+            if command not in ("init", "release")
+        )
+
+        return ["init", "release"] + sorted(commands)
+
+
+@click.group(cls=CCCGroup)
 @click.option("--filename", default="CHANGELOG.md", help="changelog filename")
 @click.option("--driver", default="kac", help="changelog format driver")
 @click.pass_context

@@ -37,12 +37,12 @@ Options:
   --help           Show this message and exit.
 
 Commands:
+  init        initialize a new file
+  release     release a version
   added       add an "added" entry
   changed     add a "changed" entry
   deprecated  add a "deprecated" entry
   fixed       add a "fixed" entry
-  init        initialize a new file
-  release     release a version
   removed     add a "removed" entry
   security    add a "security" entry
 ```
