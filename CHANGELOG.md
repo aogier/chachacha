@@ -10,17 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Better commands sorting.
+- Cover click's group help is a no-no.
 
 ## [0.1.1] - 2020-02-25
 
 ### Fixed
 
 - Fixed readme on release arguments
-
-## [0.1.1] - 2020-02-25
-
-### Fixed
-
 - Leftover code.
 - mdl-friendly markdown syntax.
 

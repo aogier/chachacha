@@ -13,7 +13,7 @@ from chachacha import drivers
 from chachacha.drivers.kac import ChangelogFormat
 
 
-class CCCGroup(click.Group):
+class CCCGroup(click.Group):  # pragma: no cover
     def __init__(self, *args, **kwargs):
         self.help_priorities = {}
         super().__init__(*args, **kwargs)
