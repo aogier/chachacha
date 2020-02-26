@@ -3,8 +3,11 @@ Created on 26 feb 2020
 
 @author: Alessandro Ogier <alessandro.ogier@gmail.com>
 """
+try:
+    from dataclasses import asdict, dataclass, fields
+except ImportError:  # pragma: no cover
+    from .vendor_dataclasses import asdict, dataclass, fields
 
-from dataclasses import asdict, dataclass, fields
 
 CONFIG_SIGNATURE = "[//]: # (C3"
 
@@ -27,11 +30,11 @@ class Configuration:
 
     def marshal(self):
         revmap = {v: k for k, v in self.conf_map.items()}
-        conf = set()
+        conf = []
         for k, v in asdict(self).items():
             if v:
-                conf.add(f"{revmap[k]}{v}")
-        return f'{CONFIG_SIGNATURE}-{self.version}-{"-".join(conf)})'
+                conf.append(f"{revmap[k]}{v}")
+        return f'{CONFIG_SIGNATURE}-{self.version}-{"-".join(sorted(conf))})'
 
     @staticmethod
     def empty():

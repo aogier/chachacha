@@ -5,12 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.1.3] - 2020-02-26
 
 ### Added
 
 - Better docs.
 - Embedded configuration system.
+- Linked compare list at bottom (GH provider).
+- Vendorized [dataclasses backport](https://github.com/ericvsmith/dataclasses) for py 3.6.
 
 ## [0.1.2] - 2020-02-26
 
@@ -36,4 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - tests
 - a changelog :D
 
-[//]: # (C3-1-DKAC)
+[Unreleased]: https://github.com/aogier/chachacha/compare/v0.1.2...HEAD
+[0.1.2]: https://github.com/aogier/chachacha/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/aogier/chachacha/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/aogier/chachacha/releases/tag/v0.1.0
+
+[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{t})

@@ -13,4 +13,4 @@ set -x
 PYTHONPATH=. ${PREFIX}pytest --ignore venv -W ignore::DeprecationWarning --cov=chachacha --cov=tests --cov-fail-under=100 --cov-report=term-missing ${@}
 #${PREFIX}mypy chachacha --ignore-missing-imports --disallow-untyped-defs
 ${PREFIX}autoflake --recursive chachacha tests setup.py
-${PREFIX}black chachacha tests setup.py --check
+${PREFIX}black chachacha tests setup.py --check --exclude vendor_dataclasses.py

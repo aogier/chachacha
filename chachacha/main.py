@@ -11,7 +11,11 @@ from click.core import Context
 
 from chachacha import drivers
 from chachacha.drivers.kac import ChangelogFormat
-from dataclasses import asdict
+
+try:
+    from dataclasses import asdict
+except ImportError:  # pragma: no cover
+    from .vendor_dataclasses import asdict
 
 
 class CCCGroup(click.Group):  # pragma: no cover

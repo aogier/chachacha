@@ -13,6 +13,7 @@ import semver
 from jinja2 import Template
 
 from chachacha.configuration import CONFIG_SIGNATURE, Configuration
+from chachacha.drivers.git_providers import github
 
 DEFAULT_HEADER = """
 # Changelog
@@ -43,6 +44,11 @@ TEMPLATE = Template(
 {%- endif %}
 {%- endfor %}
 {%- endfor %}
+{%- if git_provider is defined %}
+{% for tag, url in git_provider.compare() %}
+[{{ tag }}]: {{ url }}
+{%- endfor %}
+{%- endif %}
 {%- if config is defined %}
 {{ '\n' + config }}
 {%- endif %}
@@ -55,24 +61,47 @@ class ChangelogFormat:
         self.filename = filename
 
     def init(self, overwrite: bool = False):
-        if os.path.exists(self.filename) and not overwrite:
-            print("file exists")
-            import sys
+        if os.path.exists(self.filename):
+            if not overwrite:
+                print("file exists")
+                import sys
 
-            sys.exit(1)
+                sys.exit(1)
+            else:
+                os.unlink(self.filename)
+
+        config = self.get_config(init=True)
+        config.driver = "KAC"
 
         with open(self.filename, "w") as outfile:
-            outfile.write(TEMPLATE.render(header=DEFAULT_HEADER, current={}) + "\n")
+            outfile.write(
+                TEMPLATE.render(
+                    header=DEFAULT_HEADER, current={}, config=config.marshal()
+                )
+                + "\n"
+            )
 
         print("changelog created")
 
     def _write(self, *, current: dict = None, config: Configuration = None) -> None:
         if not config:
-            config = self.get_config()
+            config = self.get_config(init=True)
+            config.driver = "KAC"
         if not current:
             current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
         ctx = dict(header=DEFAULT_HEADER, current=current)
+
+        # TODO: will decouple
+        try:
+            if config.git_provider == "GH":
+                git_provider = github.Provider(
+                    keepachangelog.to_dict(self.filename), config
+                )
+                ctx["git_provider"] = git_provider
+        except:
+            pass
+
         if config:
             ctx["config"] = config.marshal()
 
@@ -138,10 +167,12 @@ class ChangelogFormat:
 
     def get_config(self, *, init=False):
 
-        with open(self.filename) as changelog:
-            for line in changelog:
-                if line.startswith(CONFIG_SIGNATURE):
-                    return Configuration.factory(line)
+        try:
+            with open(self.filename) as changelog:
+                for line in changelog:
+                    if line.startswith(CONFIG_SIGNATURE):
+                        return Configuration.factory(line)
 
-        if init:
-            return Configuration.empty()
+        except FileNotFoundError:
+            if init:
+                return Configuration.empty()

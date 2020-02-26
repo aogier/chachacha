@@ -9,6 +9,62 @@ from chachacha.configuration import CONFIG_SIGNATURE
 from chachacha.drivers.kac import DEFAULT_HEADER
 
 
+def test_github_provider(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    runner.invoke(main.main, ["config", "git_provider", "GH"])
+    runner.invoke(main.main, ["config", "tag_template", "v{t}"])
+    runner.invoke(main.main, ["config", "driver", "KAC"])
+    runner.invoke(main.main, ["config", "repo_name", "aogier/chachacha"])
+
+    for _ in range(3):
+        runner.invoke(main.main, ["added", "a changelog entry string"])
+        runner.invoke(main.main, ["added", "a changelog entry string"])
+        runner.invoke(main.main, ["release", "--major"])
+
+    changelog = open("CHANGELOG.md").read()
+
+    assert (
+        changelog
+        == """# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [3.0.0] - 2020-02-26
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+## [2.0.0] - 2020-02-26
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+## [1.0.0] - 2020-02-26
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+[Unreleased]: https://github.com/aogier/chachacha/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
+[1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
+
+[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{t})
+"""
+    )
+
+
 def test_configuration(tmp_path):
     os.chdir(tmp_path)
     runner = CliRunner()
@@ -141,7 +197,7 @@ def test_file_creation(tmp_path):
 
     with open("CHANGELOG.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
 
     with open("FILENAME.md", "w") as changelog:
         changelog.write("foo")
@@ -156,7 +212,7 @@ def test_file_creation(tmp_path):
 
     with open("FILENAME.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
 
 
 def test_add_added(tmp_path):
