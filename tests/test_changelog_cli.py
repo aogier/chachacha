@@ -4,7 +4,7 @@ from datetime import datetime
 import keepachangelog
 from click.testing import CliRunner
 
-from chachacha import __version__, main
+from chachacha import main
 from chachacha.configuration import CONFIG_SIGNATURE
 from chachacha.drivers.kac import DEFAULT_HEADER
 
@@ -47,10 +47,11 @@ def test_release_major(tmp_path):
     runner = CliRunner()
     runner.invoke(main.main, ["init"])
 
-    result = runner.invoke(main.main, ["added", "a changelog entry string"])
+    runner.invoke(main.main, ["added", "a changelog entry string"])
     result = runner.invoke(main.main, ["release", "--major"])
-    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert result.exit_code == 0
+
+    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "1.0.0": {
             "added": ["- a changelog entry string"],
@@ -65,10 +66,12 @@ def test_release_minor(tmp_path):
     runner = CliRunner()
     runner.invoke(main.main, ["init"])
 
-    result = runner.invoke(main.main, ["added", "a changelog entry string"])
+    runner.invoke(main.main, ["added", "a changelog entry string"])
     result = runner.invoke(main.main, ["release", "--minor"])
-    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert result.exit_code == 0
+
+    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
+
     assert parsed == {
         "0.1.0": {
             "added": ["- a changelog entry string"],
@@ -83,10 +86,11 @@ def test_release_patch(tmp_path):
     runner = CliRunner()
     runner.invoke(main.main, ["init"])
 
-    result = runner.invoke(main.main, ["added", "a changelog entry string"])
+    runner.invoke(main.main, ["added", "a changelog entry string"])
     result = runner.invoke(main.main, ["release", "--patch"])
-    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert result.exit_code == 0
+
+    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "0.0.1": {
             "added": ["- a changelog entry string"],

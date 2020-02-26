@@ -3,8 +3,6 @@ Created on 26 feb 2020
 
 @author: Alessandro Ogier <alessandro.ogier@gmail.com>
 """
-from collections import defaultdict
-from pprint import pprint
 
 from dataclasses import asdict, dataclass, fields
 
@@ -28,7 +26,6 @@ class Configuration:
     tag_template: str
 
     def marshal(self):
-        ret = CONFIG_SIGNATURE
         revmap = {v: k for k, v in self.conf_map.items()}
         conf = set()
         for k, v in asdict(self).items():
