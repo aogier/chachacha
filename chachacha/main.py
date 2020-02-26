@@ -11,6 +11,7 @@ from click.core import Context
 
 from chachacha import drivers
 from chachacha.drivers.kac import ChangelogFormat
+from dataclasses import asdict
 
 
 class CCCGroup(click.Group):  # pragma: no cover
@@ -110,6 +111,27 @@ def security(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None
 def release(driver: ChangelogFormat, mode: str) -> None:
 
     driver.release(mode)
+
+
+@main.command(help="configure changelog options")
+@click.option("--global", "_global", help="act globally", is_flag=True)
+@click.option("--show", help="show config", is_flag=True)
+@click.argument("key", default="")
+@click.argument("value", default="")
+@click.pass_obj
+def config(
+    driver: ChangelogFormat, _global: bool, show: bool, key: str, value: str
+) -> None:
+
+    config = driver.get_config(init=True)
+
+    if not key:
+        for k, v in asdict(config).items():
+            print(f"{k}={v}")
+
+    if value:
+        setattr(config, key, value)
+        driver._write(config=config)
 
 
 if __name__ == "__main__":  # pragma: no cover

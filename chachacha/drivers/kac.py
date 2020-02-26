@@ -12,6 +12,8 @@ import keepachangelog
 import semver
 from jinja2 import Template
 
+from chachacha.configuration import CONFIG_SIGNATURE, Configuration
+
 DEFAULT_HEADER = """
 # Changelog
 
@@ -26,7 +28,6 @@ TEMPLATE = Template(
     """
 
 {{ header }}
-
 {%- for version, changes in current.items() %}
 
 ## [{{ version }}]{% if changes.release_date %} - {{ changes.release_date }}{% endif %}
@@ -36,10 +37,15 @@ TEMPLATE = Template(
 ### {{ section | title }}
 {% for entry in changes[section] %}
 {{ entry }}
+
 {%- endfor %}
+
 {%- endif %}
 {%- endfor %}
 {%- endfor %}
+{%- if config is defined %}
+{{ '\n' + config }}
+{%- endif %}
 """.strip()
 )
 
@@ -60,12 +66,19 @@ class ChangelogFormat:
 
         print("changelog created")
 
-    def _write(self, current: dict) -> None:
+    def _write(self, *, current: dict = None, config: Configuration = None) -> None:
+        if not config:
+            config = self.get_config()
+        if not current:
+            current = keepachangelog.to_dict(self.filename, show_unreleased=True)
+
+        ctx = dict(header=DEFAULT_HEADER, current=current)
+        if config:
+            ctx["config"] = config.marshal()
+
         with open(self.filename, "w") as outfile:
 
-            outfile.write(
-                TEMPLATE.render(header=DEFAULT_HEADER, current=current) + "\n"
-            )
+            outfile.write(TEMPLATE.render(ctx) + "\n")
 
     def add_entry(
         self, section_name: str, changelog_line: typing.Union[str, tuple]
@@ -89,7 +102,7 @@ class ChangelogFormat:
 
         section.append(_changelog_line)
 
-        self._write(current)
+        self._write(current=current)
 
     def release(self, mode: str) -> None:
 
@@ -121,4 +134,14 @@ class ChangelogFormat:
         changelog[last]["release_date"] = datetime.now().isoformat().split("T")[0]
         changelog.update(current)
 
-        self._write(changelog)
+        self._write(current=changelog)
+
+    def get_config(self, *, init=False):
+
+        with open(self.filename) as changelog:
+            for line in changelog:
+                if line.startswith(CONFIG_SIGNATURE):
+                    return Configuration.factory(line)
+
+        if init:
+            return Configuration.empty()

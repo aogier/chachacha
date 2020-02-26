@@ -5,7 +5,41 @@ import keepachangelog
 from click.testing import CliRunner
 
 from chachacha import __version__, main
+from chachacha.configuration import CONFIG_SIGNATURE
 from chachacha.drivers.kac import DEFAULT_HEADER
+
+
+def test_configuration(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    result = runner.invoke(main.main, ["config", "driver", "KAC"])
+    assert result.exit_code == 0
+
+    found = False
+    with open("CHANGELOG.md") as changelog:
+        for line in changelog:
+            if line.startswith(CONFIG_SIGNATURE):
+                found = True
+
+    assert found
+
+    result = runner.invoke(main.main, ["config", "driver", "KACZ"])
+    assert result.exit_code == 0
+
+    found = False
+    with open("CHANGELOG.md") as changelog:
+        for line in changelog:
+            if line.startswith(CONFIG_SIGNATURE):
+                found = True
+
+    assert found
+
+    result = runner.invoke(main.main, ["config"])
+    assert result.exit_code == 0
+
+    assert result.output == "driver=KACZ\ngit_provider=\nrepo_name=\ntag_template=\n"
 
 
 def test_release_major(tmp_path):

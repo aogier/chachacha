@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Better docs.
+- Embedded configuration system.
 
 ## [0.1.2] - 2020-02-26
 
@@ -34,3 +35,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - first version
 - tests
 - a changelog :D
+
+[//]: # (C3-1-DKAC)
