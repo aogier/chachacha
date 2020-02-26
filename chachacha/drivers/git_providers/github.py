@@ -24,6 +24,7 @@ class Provider:
     def compare(self):
 
         last = "HEAD"
+        self.changelog.pop("Unreleased", None)
         for release in self.changelog:
             yield last if last != "HEAD" else "Unreleased", self.compare_template.format(
                 repo_name=self.config.repo_name,
