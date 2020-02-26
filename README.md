@@ -83,3 +83,77 @@ Where:
 
 Specification on this behaviour is directly taken from [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 thanks to python [semver library](https://python-semver.readthedocs.io/en/latest/).
+
+## Examples
+
+### Start a changelog, add entries and then bump it
+
+```shell
+chachacha init
+# quoting is supported
+chachacha added "this is a new feature I'm excited about"
+chachacha added this is also good
+chachacha deprecated this is no longer valid
+```
+
+File is now:
+
+```shell
+cat CHANGELOG.md
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- this is a new feature I'm excited about
+- this is also good
+
+### Deprecated
+
+- this is no longer valid
+
+```
+
+Now release it:
+
+```shell
+chachacha release
+chachacha added new version added item
+```
+
+File is now:
+
+```
+cat CHANGELOG.md
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+
+- new version added item
+
+## [0.0.1] - 2020-02-26
+
+### Added
+
+- this is a new feature I'm excited about
+- this is also good
+
+### Deprecated
+
+- this is no longer valid
+```
