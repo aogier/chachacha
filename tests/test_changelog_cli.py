@@ -9,20 +9,25 @@ from chachacha.configuration import CONFIG_SIGNATURE
 from chachacha.drivers.kac import DEFAULT_HEADER
 
 
-def test_github_provider(tmp_path):
+def test_git_provider_missing_param(tmp_path):
     os.chdir(tmp_path)
     runner = CliRunner()
     runner.invoke(main.main, ["init"])
 
-    runner.invoke(main.main, ["config", "git_provider", "GH"])
-    runner.invoke(main.main, ["config", "tag_template", "v{t}"])
-    runner.invoke(main.main, ["config", "driver", "KAC"])
-    runner.invoke(main.main, ["config", "repo_name", "aogier/chachacha"])
+    result = runner.invoke(main.main, ["config", "git_provider", "GH"])
+    assert result.exit_code == 0, result.output
+    result = runner.invoke(main.main, ["config", "tag_template", "v{t}"])
+    assert result.exit_code == 0, result.output
+    result = runner.invoke(main.main, ["config", "driver", "KAC"])
+    assert result.exit_code == 0, result.output
 
     for _ in range(3):
-        runner.invoke(main.main, ["added", "a changelog entry string"])
-        runner.invoke(main.main, ["added", "a changelog entry string"])
-        runner.invoke(main.main, ["release", "--major"])
+        result = runner.invoke(main.main, ["added", "a changelog entry string"])
+        assert result.exit_code == 0, result.output
+        result = runner.invoke(main.main, ["added", "a changelog entry string"])
+        assert result.exit_code == 0, result.output
+        result = runner.invoke(main.main, ["release", "--major"])
+        assert result.exit_code == 0, result.output
 
     changelog = open("CHANGELOG.md").read()
 
@@ -35,21 +40,83 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - 2020-02-26
+## [3.0.0] - {date}
 
 ### Added
 
 - a changelog entry string
 - a changelog entry string
 
-## [2.0.0] - 2020-02-26
+## [2.0.0] - {date}
 
 ### Added
 
 - a changelog entry string
 - a changelog entry string
 
-## [1.0.0] - 2020-02-26
+## [1.0.0] - {date}
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+
+[//]: # (C3-1-DKAC-GGH-Tv{{t}})
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
+    )
+
+
+def test_git_provider(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    result = runner.invoke(main.main, ["config", "git_provider", "GH"])
+    assert result.exit_code == 0
+    result = runner.invoke(main.main, ["config", "tag_template", "v{t}"])
+    assert result.exit_code == 0
+    result = runner.invoke(main.main, ["config", "driver", "KAC"])
+    assert result.exit_code == 0
+    result = runner.invoke(main.main, ["config", "repo_name", "aogier/chachacha"])
+    assert result.exit_code == 0
+
+    for _ in range(3):
+        result = runner.invoke(main.main, ["added", "a changelog entry string"])
+        assert result.exit_code == 0
+        result = runner.invoke(main.main, ["added", "a changelog entry string"])
+        assert result.exit_code == 0
+        result = runner.invoke(main.main, ["release", "--major"])
+        assert result.exit_code == 0
+
+    changelog = open("CHANGELOG.md").read()
+
+    assert (
+        changelog
+        == """# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [3.0.0] - {date}
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+## [2.0.0] - {date}
+
+### Added
+
+- a changelog entry string
+- a changelog entry string
+
+## [1.0.0] - {date}
 
 ### Added
 
@@ -61,8 +128,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
 
-[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{t})
-"""
+[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{{t}})
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
     )
 
 

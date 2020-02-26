@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "chachacha"
+description = "Chachacha changes changelogs"
+version = "0.1.5"
+authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+keepachangelog = "^0.2.0"
+click = "^7.0"
+jinja2 = "^2.11.1"
+semver = "^2.9.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.6"
+ipython = "^7.12.0"
+mypy = "^0.761"
+black = "^19.10b0"
+autoflake = "^1.3.1"
+isort = "^4.3.21"
+pytest-cov = "^2.8.1"
+poetry-version = "^0.1.5"
+wheel = "^0.34.2"
+twine = "^3.1.1"
+pyinstaller = "^3.6"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+

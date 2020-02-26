@@ -9,7 +9,7 @@ import typing
 import click
 from click.core import Context
 
-from chachacha import drivers
+from chachacha import __version__, drivers
 from chachacha.drivers.kac import ChangelogFormat
 
 try:
@@ -32,10 +32,10 @@ class CCCGroup(click.Group):  # pragma: no cover
         commands = (
             command
             for command in super().list_commands(ctx)
-            if command not in ("init", "release", "config")
+            if command not in ("init", "release", "config", "version")
         )
 
-        return ["init", "config", "release"] + sorted(commands)
+        return ["init", "config", "release"] + sorted(commands) + ["version"]
 
 
 @click.group(cls=CCCGroup)
@@ -135,7 +135,12 @@ def config(
 
     if value:
         setattr(config, key, value)
-        driver._write(config=config)
+        driver.write(config=config)
+
+
+@main.command(help="show version and exit")
+def version():  # pragma: no cover
+    print(f"v{__version__}")
 
 
 if __name__ == "__main__":  # pragma: no cover

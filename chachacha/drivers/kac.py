@@ -13,7 +13,7 @@ import semver
 from jinja2 import Template
 
 from chachacha.configuration import CONFIG_SIGNATURE, Configuration
-from chachacha.drivers.git_providers import github
+from chachacha.drivers.git_provider import Provider
 
 DEFAULT_HEADER = """
 # Changelog
@@ -50,7 +50,8 @@ TEMPLATE = Template(
 {%- endfor %}
 {%- endif %}
 {%- if config is defined %}
-{{ '\n' + config }}
+
+{{ config }}
 {%- endif %}
 """.strip()
 )
@@ -83,7 +84,7 @@ class ChangelogFormat:
 
         print("changelog created")
 
-    def _write(self, *, current: dict = None, config: Configuration = None) -> None:
+    def write(self, *, current: dict = None, config: Configuration = None) -> None:
         if not config:
             config = self.get_config(init=True)
             config.driver = "KAC"
@@ -92,13 +93,9 @@ class ChangelogFormat:
 
         ctx = dict(header=DEFAULT_HEADER, current=current)
 
-        # TODO: will decouple
-        try:
-            if config.git_provider == "GH":
-                git_provider = github.Provider(current, config)
-                ctx["git_provider"] = git_provider
-        except:
-            pass
+        if config.git_provider:
+            git_provider = Provider(current, config)
+            ctx["git_provider"] = git_provider
 
         if config:
             ctx["config"] = config.marshal()
@@ -129,7 +126,7 @@ class ChangelogFormat:
 
         section.append(_changelog_line)
 
-        self._write(current=current)
+        self.write(current=current)
 
     def release(self, mode: str) -> None:
 
@@ -161,7 +158,7 @@ class ChangelogFormat:
         changelog[last]["release_date"] = datetime.now().isoformat().split("T")[0]
         changelog.update(current)
 
-        self._write(current=changelog)
+        self.write(current=changelog)
 
     def get_config(self, *, init=False):
 

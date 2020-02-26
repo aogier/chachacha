@@ -1,19 +1,43 @@
-dist: xenial
+dist: bionic
 language: python
 
 cache: pip
 
 python:
-    - "3.6"
-    - "3.7"
-    - "3.8"
+  - "3.6"
+  - "3.7"
+  - "3.8"
 
 install:
-    - pip install -U -r requirements-dev.txt
+  - sudo apt-get -y install upx-ucl
+  - pip install -U -r requirements-dev.txt
 
 script:
-    - scripts/test
+  - scripts/test
+  - pyinstaller -s -F chachacha/main.py -n chachacha
+
+env:
+  global:
+    - secure: "DHj2ma1AYFPuZh53Wnv9OPlMUboWOkBhvlJkN9vvW3ApthWbpQuegfJCQXrZFr2vFx10B9qdkj+NKCd1iy2PVPzYu4OFtb8xDBM8keYwbAK7gQ+EdCivFLOGU+n00FgJiKv0vFwtgKR7NAW/iTGVDSvviWDjs9kIrjIK3/ELSlmuBoOJ7qvxqnDeNqmU+LkR3ShETOY7KGkgpuE6UUEG/kfDUa0M6JUkGI/3i6iMbuyOUJn+gzADPDoBc0bnjEA6AsOF5f048vlfL57w3CyuV4qfbybHyU2phojOtTPKGt1I0jVN9lvQq4015jeoG1Qrc3oKaYXbo0NM2ah2aOpoq6wGMMBKnW4g+bEX9k+QScGLhuozMeMLAHYB4BIzwWv/E7aneI13uBogt2YT2DY64z9MwvRLJ3TUFJArh6NfbEzqCn4YabuzOMeOIQER5NwH0yrl/SFpQkQ3nfGm4qs1Cxa9Wga9RZ8DeeqUxT0LbuEXBjQsHaXDe/EFAo6cbDVL3eRsbrEK3LjsX54+412L5DF89WAcu4Y26XsZXofUuSO2ASgPKwve903JSw+9kWhz6BNLWdYdkuoc4e5Tp3uL8jPm0BebD88pmGdSvQkkfY7PxUFBqWGpszcxXIbI8yIPLMFavQVLOF80ACqMrX/RrZWq8hDDE+fyZy5Ci8QSpyw="
 
 after_script:
-    - pip install codecov
-    - codecov
+  - pip install codecov
+  - codecov
+
+.deploy_condition: &deploy_condition
+  on:
+    python: '3.7'
+    tags: true
+    repo: aogier/chachacha
+
+deploy:
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+      secure: isyzqPx8WxC2J4ND+2f2wqx+lBtM2fqlxBofk1DpY10BEAA3o98zyCBc3fbjFjkGSakcfBKDLMOK3iSMj/yV4bxQboFT1BmNPbkFjMZIotuZ7kIsOvboYvlEGlVcYY6UL7YZtp3GCSsc/sDrrEmNmow+owhMuFBZsLOdwj1eLBwKv3rBBoqM3qI+QFvgzGHuDrBN7jeOWPx3zC6zZGG7sSPlT82vfR85h8FHKg1qsWnfZ8j+MW/SULDvd9ZwuRhwO6BOjgMmxbQh5ffSGhLtNXxcI7MKknVhkhxgWh/mekoyDSaYqqdqcuLpVYlNTIrT0JTvd2VaH1PzjBYyUchszVGM6SL0scFTdjulfsLbr0J04GvfGvqKV0ixwkabYgas80l4vgMBaaDYY5+Hm6UGeqnFx4/uECoXqOk8q+Lh9+8b5gPVMo8HCOsGb/X1tKUsCxTuF/6ZBvPLBQRfrdRFndr7H3drae4EcMHso+jFmuH9JLJq2I1nBmgWKcAIXlzh4SpQUhNKxkct9PdKYtNvFyL0R0uM94Ti8s4tRaISg5+6Rh/1aSRDT8RkwLOJxGVy/cOc6MnlOt3pxN8Tx2IaDUfd8n3QJMrlLKK4Z4LxkR+K30SzO/RaJiivgseQ9ckvQ3bvrVvou/8YJKnYTqSjbD+HzAbta93XgMDb4nCTzEs=
+    file: dist/chachacha
+    <<: *deploy_condition
+
+  - provider: script
+    script: python setup.py bdist_wheel && twine upload -u __token__ dist/*whl --skip-existing
+    <<: *deploy_condition
