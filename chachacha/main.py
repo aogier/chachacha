@@ -32,10 +32,10 @@ class CCCGroup(click.Group):  # pragma: no cover
         commands = (
             command
             for command in super().list_commands(ctx)
-            if command not in ("init", "release")
+            if command not in ("init", "release", "config")
         )
 
-        return ["init", "release"] + sorted(commands)
+        return ["init", "config", "release"] + sorted(commands)
 
 
 @click.group(cls=CCCGroup)

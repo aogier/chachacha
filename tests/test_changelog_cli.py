@@ -56,7 +56,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 - a changelog entry string
 
-[Unreleased]: https://github.com/aogier/chachacha/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/aogier/chachacha/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/aogier/chachacha/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
 

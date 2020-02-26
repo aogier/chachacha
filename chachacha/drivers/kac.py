@@ -95,9 +95,7 @@ class ChangelogFormat:
         # TODO: will decouple
         try:
             if config.git_provider == "GH":
-                git_provider = github.Provider(
-                    keepachangelog.to_dict(self.filename), config
-                )
+                git_provider = github.Provider(current, config)
                 ctx["git_provider"] = git_provider
         except:
             pass

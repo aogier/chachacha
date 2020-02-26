@@ -5,9 +5,8 @@
 [![Package version](https://badge.fury.io/py/chachacha.svg)](https://pypi.org/project/chachacha)
 
 Chachacha changes changelogs. This is a tool you can use to keep your changelog tidy,
-for now it only supports the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
-specification but the tool's architecture is plugin-based so expect other formats
-and/or contribute by yourself what matters! Yay!
+following the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+specification which is the most implemented plugin at the moment.
 
 ## Installation
 
@@ -46,6 +45,7 @@ Options:
 
 Commands:
   init        initialize a new file
+  config      configure changelog options
   release     release a version
   added       add an "added" entry
   changed     add a "changed" entry
@@ -55,9 +55,11 @@ Commands:
   security    add a "security" entry
 ```
 
-Once again please note that KeepAChangelog format is a plugin, and
-implementing other formats is planned/expected. KAC format driver heavily
-depends on Colin Bounouar's [keepachangelog library](https://github.com/Colin-b/keepachangelog).
+So you can *add*, *change*, *deprecate*, *fix*, *remove* and *security
+announce* your changes.
+
+KAC format plugin driver heavily depends on Colin Bounouar's
+[keepachangelog library](https://github.com/Colin-b/keepachangelog).
 
 Releasing a version is simple as:
 
@@ -81,12 +83,48 @@ Where:
 * minor: release a minor
 * patch: release a patch
 
-Specification on this behaviour is directly taken from [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
+Specification follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 thanks to python [semver library](https://python-semver.readthedocs.io/en/latest/).
+
+## Configuration
+
+Starting from 0.1.3, Chachacha supports a small configuration system directly
+embedded in the file via a hack on Markdown link syntax. This allow for
+a number of features like generating compare history:
+
+```shell
+chachacha init
+
+chachacha config git_provider GH
+chachacha config repo_name aogier/chachacha
+chachacha config tag_template 'v{t}'
+
+chachacha added one feature
+chachacha added another feature
+chachacha release
+chachacha security hole
+chachacha added capability
+cat CHANGELOG.md
+
+
+[...]
+- another feature
+
+[Unreleased]: https://github.com/aogier/chachacha/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/aogier/chachacha/releases/tag/v0.0.1
+
+[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{t})
+```
+Configuration system keys are:
+
+* `git_provider`: a git repo provider driver (supported: `GH` for github.com)
+* `repo_name`: repo name + namespace your repo is
+* `tag_template`: a tag template which maps release versions with tag names.
+  Variable `t` will be expanded with the version number.
 
 ## Examples
 
-### Start a changelog, add entries and then bump it
+### Start a changelog, add entries and then release
 
 ```shell
 chachacha init
@@ -119,6 +157,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - this is no longer valid
 
+[//]: # (C3-1-DKAC)
 ```
 
 Now release it:
@@ -156,4 +195,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 - this is no longer valid
+
+[//]: # (C3-1-DKAC)
 ```
