@@ -9,7 +9,6 @@ python:
   - "3.8"
 
 install:
-  - sudo apt-get -y install upx-ucl
   - pip install -U -r requirements-dev.txt
 
 script:
