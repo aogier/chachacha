@@ -108,6 +108,9 @@ class ChangelogFormat:
         self, section_name: str, changelog_line: typing.Union[str, tuple]
     ) -> None:
 
+        if isinstance(changelog_line, str):
+            changelog_line = (changelog_line,)
+
         _changelog_line = "- " + " ".join(changelog_line)
         current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
