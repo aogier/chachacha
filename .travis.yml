@@ -40,5 +40,5 @@ deploy:
     <<: *deploy_condition
 
   - provider: script
-    script: ~/.poetry/bin/poetry build && twine upload -u __token__ dist/*whl --skip-existing
+    script: ~/.poetry/bin/poetry publish --build
     <<: *deploy_condition

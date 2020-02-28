@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- more badges in readme
+
+### Changed
+
+- minimum python version is now 3.6 instead of 3.7
+- removed useless dev dependencies
+- bumped pyinstaller version
+
+### Fixed
+
+- added more tests
+
 ## [0.2.0] - 2020-12-13
 
 ### Added

@@ -29,7 +29,10 @@ class Provider:
         last = "HEAD"
         self.changelog.pop("Unreleased", None)
         # xxx: emit warning?
-        if not all((self.config.repo_name, self.config.tag_template)):
+        if (
+            not all((self.config.repo_name, self.config.tag_template))
+            or self.config.git_provider not in PROVIDERS
+        ):
             return
         for release in self.changelog:
             yield last if last != "HEAD" else "Unreleased", PROVIDERS[

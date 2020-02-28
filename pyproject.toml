@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "chachacha"
 description = "Chachacha changes changelogs"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
 readme = "README.md"
 license = "BSD"
@@ -13,13 +13,16 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Topic :: Internet :: WWW/HTTP",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
 ]
 
 [tool.poetry.scripts]
 chachacha = "chachacha.main:main"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6"
 keepachangelog = "^0.3.1"
 click = "^7.0"
 jinja2 = "^2.11.1"
@@ -28,15 +31,12 @@ semver = "^2.9.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^4.6"
-ipython = "^7.12.0"
 mypy = "^0.761"
 black = "^19.10b0"
 autoflake = "^1.3.1"
 isort = "^4.3.21"
 pytest-cov = "^2.8.1"
-wheel = "^0.34.2"
-twine = "^3.1.1"
-pyinstaller = "^3.6"
+pyinstaller = "^4.1"
 pylint = "^2.5.3"
 
 [build-system]
