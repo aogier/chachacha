@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/aogier/chachacha.svg?branch=master)](https://travis-ci.org/aogier/chachacha)
 [![codecov](https://codecov.io/gh/aogier/chachacha/branch/master/graph/badge.svg)](https://codecov.io/gh/aogier/chachacha)
 [![Package version](https://badge.fury.io/py/chachacha.svg)](https://pypi.org/project/chachacha)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/chachacha?logo=python&logoColor=%235F9)](https://pypi.org/project/chachacha)
 
 Chachacha changes changelogs. This is a tool you can use to keep your changelog tidy,
 following the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
