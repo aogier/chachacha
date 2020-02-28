@@ -4,6 +4,7 @@ Created on 25 feb 2020
 @author: Alessandro Ogier <alessandro.ogier@gmail.com>
 """
 
+import json
 import typing
 
 import click
@@ -32,10 +33,10 @@ class CCCGroup(click.Group):  # pragma: no cover
         commands = (
             command
             for command in super().list_commands(ctx)
-            if command not in ("init", "release", "config", "version")
+            if command not in ("init", "release", "config", "version", "query")
         )
 
-        return ["init", "config", "release"] + sorted(commands) + ["version"]
+        return ["init", "config", "release", "query"] + sorted(commands) + ["version"]
 
 
 @click.group(cls=CCCGroup)
@@ -136,6 +137,21 @@ def config(
     if value:
         setattr(config, key, value)
         driver.write(config=config)
+
+
+@main.command(help="extract info")
+@click.option(
+    "--version",
+    default="latest",
+    help="a version, `latest` for latest release, `head` for current unreleased",
+)
+@click.option("--format", "_format", default="json", help="output format: json, md")
+@click.pass_obj
+def query(driver: ChangelogFormat, version, _format) -> None:
+
+    print(json.dumps(driver.dict, separators=(",", ":")))
+
+    pass
 
 
 @main.command(help="show version and exit")

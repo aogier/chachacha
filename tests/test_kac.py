@@ -850,3 +850,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [//]: # (C3-1-DKAC)
 """
     )
+
+
+def test_dict(tmp_path):
+
+    os.chdir(tmp_path)
+    filename = "CHANGELOG.md"
+
+    driver = drivers.kac.ChangelogFormat(filename)
+    driver.init()
+
+    driver.add_entry("removed", "a changelog entry string")
+
+    assert driver.dict == {
+        "Unreleased": {
+            "release_date": None,
+            "removed": ["- a changelog entry string"],
+            "version": "Unreleased",
+        }
+    }

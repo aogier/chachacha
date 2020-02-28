@@ -1,3 +1,4 @@
+import json
 import os
 from datetime import datetime
 
@@ -448,5 +449,25 @@ def test_add_entries(tmp_path):
                 "- a changelog entry string",
                 "- an unquoted changelog entry string",
             ],
+        }
+    }
+
+
+def test_dict(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    result = runner.invoke(main.main, ["added", "a changelog entry string"])
+    assert result.exit_code == 0
+
+    result = runner.invoke(main.main, ["query"])
+    assert result.exit_code == 0
+
+    assert json.loads(result.output) == {
+        "Unreleased": {
+            "release_date": None,
+            "added": ["- a changelog entry string"],
+            "version": "Unreleased",
         }
     }
