@@ -321,7 +321,7 @@ description = "Convert changelog into dict."
 name = "keepachangelog"
 optional = false
 python-versions = ">=3.6"
-version = "0.2.0"
+version = "0.3.0"
 
 [package.extras]
 testing = ["starlette (>=0.13.0,<0.14.0)", "requests (>=2.0.0,<3.0.0)", "pytest-cov (>=2.0.0,<3.0.0)"]
@@ -824,7 +824,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "26d2394e77dac6224f7d88feae2803f45ee1f6b33ccea16af839f4cf490e4595"
+content-hash = "6e6f24fb474d745f09357ba0378c894c6624039334d8a261430f983a1dc38b66"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1011,8 +1011,8 @@ jinja2 = [
     {file = "Jinja2-2.11.1.tar.gz", hash = "sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"},
 ]
 keepachangelog = [
-    {file = "keepachangelog-0.2.0-py3-none-any.whl", hash = "sha256:0c04b04e1941896c0665c43cc7e1dece99ebeb851e9358ea33ce13d51ac927f9"},
-    {file = "keepachangelog-0.2.0.tar.gz", hash = "sha256:b5db765530ae00822df0bef93c9f604858e3e5e6cd6465434475191a990dc4d0"},
+    {file = "keepachangelog-0.3.0-py3-none-any.whl", hash = "sha256:c1c8386f421430ae989d78f6d344a6aed0b85ae7d84729eaef1ec29abe7b9774"},
+    {file = "keepachangelog-0.3.0.tar.gz", hash = "sha256:9b9f515bf0cd7bad39c616c91ca589889e13655b0e605e5fd530bf64fe620bdb"},
 ]
 keyring = [
     {file = "keyring-21.1.0-py2.py3-none-any.whl", hash = "sha256:24ae23ab2d6adc59138339e56843e33ec7b0a6b2f06302662477085c6c0aca00"},
