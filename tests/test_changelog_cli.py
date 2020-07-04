@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 
 
-[//]: # (C3-1-DKAC-GGH-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -128,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
 
-[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Raogier/chachacha:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -267,7 +267,7 @@ def test_file_creation(tmp_path):
 
     with open("CHANGELOG.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
     with open("FILENAME.md", "w") as changelog:
         changelog.write("foo")
@@ -282,7 +282,7 @@ def test_file_creation(tmp_path):
 
     with open("FILENAME.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 
 def test_add_added(tmp_path):
