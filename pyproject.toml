@@ -4,7 +4,7 @@ description = "Chachacha changes changelogs"
 version = "0.1.5"
 authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
 readme = "README.md"
-License = "BSD"
+license = "BSD"
 repository = "https://github.com/aogier/chachacha"
 classifiers = [
     "Development Status :: 3 - Alpha",
