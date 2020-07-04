@@ -167,6 +167,44 @@ def test_configuration(tmp_path):
 
     assert result.output == "driver=KACZ\ngit_provider=\nrepo_name=\ntag_template=\n"
 
+def test_configuration_parsing_version_1(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    
+    with open("CHANGELOG.md", "w", encoding="utf8") as changelog:
+        changelog.write("""
+
+an example changelog.
+
+The only purpose of this is to see how well chachacha handles older configurations (version one)
+
+[//]: # (C3-1-DKAC-Rewenlbh/nohyphenshere-GGH-Tversion{t})
+
+""")
+
+    result = runner.invoke(main.main, ["config"])
+    assert result.exit_code == 0
+    assert result.output == "driver=KAC\ngit_provider=GH\nrepo_name=ewenlbh/nohyphenshere\ntag_template=version{t}\n"
+
+def test_configuration_parsing_version_unvalid(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    
+    with open("CHANGELOG.md", "w", encoding="utf8") as changelog:
+        changelog.write("""
+
+an example changelog.
+
+The only purpose of this is to see how well chachacha handles unvalid configuration versions
+unvalid versions are also versions that haven't been released yet, so that the user is warned
+
+[//]: # (C3-42-DKAC-Rewenlbh/nohyphenshere-GGH-Tversion{t})
+
+""")
+
+    result = runner.invoke(main.main, ["config"])
+    assert result.exit_code != 0
+    
 
 def test_release_major(tmp_path):
     os.chdir(tmp_path)
