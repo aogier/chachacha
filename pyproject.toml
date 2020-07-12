@@ -20,7 +20,7 @@ chachacha = "chachacha.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-keepachangelog = "^0.2.0"
+keepachangelog = "^0.3.0"
 click = "^7.0"
 jinja2 = "^2.11.1"
 poetry-version = "^0.1.5"
