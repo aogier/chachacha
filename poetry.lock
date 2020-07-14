@@ -321,7 +321,7 @@ description = "Convert changelog into dict."
 name = "keepachangelog"
 optional = false
 python-versions = ">=3.6"
-version = "0.2.0"
+version = "0.3.1"
 
 [package.extras]
 testing = ["starlette (>=0.13.0,<0.14.0)", "requests (>=2.0.0,<3.0.0)", "pytest-cov (>=2.0.0,<3.0.0)"]
@@ -824,7 +824,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "26d2394e77dac6224f7d88feae2803f45ee1f6b33ccea16af839f4cf490e4595"
+content-hash = "623c0bc125ba6205d6d028f3291a157a38ee16de198b4b31e46ae95f8e533ba4"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -1011,8 +1011,8 @@ jinja2 = [
     {file = "Jinja2-2.11.1.tar.gz", hash = "sha256:93187ffbc7808079673ef52771baa950426fd664d3aad1d0fa3e95644360e250"},
 ]
 keepachangelog = [
-    {file = "keepachangelog-0.2.0-py3-none-any.whl", hash = "sha256:0c04b04e1941896c0665c43cc7e1dece99ebeb851e9358ea33ce13d51ac927f9"},
-    {file = "keepachangelog-0.2.0.tar.gz", hash = "sha256:b5db765530ae00822df0bef93c9f604858e3e5e6cd6465434475191a990dc4d0"},
+    {file = "keepachangelog-0.3.1-py3-none-any.whl", hash = "sha256:d63e302114a57287f90a44b38945072af9c425418d2c7a0e66f5b0c44264daf2"},
+    {file = "keepachangelog-0.3.1.tar.gz", hash = "sha256:d53b77d9d4d8635af8487548a4fefb8a135003b243dafb94b24b6b0ff435ab89"},
 ]
 keyring = [
     {file = "keyring-21.1.0-py2.py3-none-any.whl", hash = "sha256:24ae23ab2d6adc59138339e56843e33ec7b0a6b2f06302662477085c6c0aca00"},
@@ -1179,6 +1179,7 @@ regex = [
     {file = "regex-2020.2.20.tar.gz", hash = "sha256:9e9624440d754733eddbcd4614378c18713d2d9d0dc647cf9c72f64e39671be5"},
 ]
 requests = [
+    {file = "requests-2.23.0-py2.7.egg", hash = "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4"},
     {file = "requests-2.23.0-py2.py3-none-any.whl", hash = "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee"},
     {file = "requests-2.23.0.tar.gz", hash = "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"},
 ]
