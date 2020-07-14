@@ -48,8 +48,8 @@ class Configuration:
         if version == "1":
             _, _, *args = conf.strip("()").split("-")
         elif version == "2":
-            _, _, args = conf.strip("()").split("-")
-            args = args.split(':')
+            _, _, *args = conf.strip("()").split("-")
+            args = '-'.join(args).split(':')
         else:
             raise ValueError(f"Unknown chachacha config version {version!r}, expecting one of '1', '2'")
 
