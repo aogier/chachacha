@@ -143,7 +143,7 @@ class ChangelogFormat:
         except IndexError:
             last = "0.0.0"
 
-        version = semver.parse_version_info(last)
+        version = semver.VersionInfo.parse(last)
 
         if mode == "major":
             last = str(version.bump_major())
