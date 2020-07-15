@@ -218,7 +218,7 @@ def test_release_major(tmp_path):
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "1.0.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "1.0.0",
         }
@@ -238,7 +238,7 @@ def test_release_minor(tmp_path):
 
     assert parsed == {
         "0.1.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.1.0",
         }
@@ -257,7 +257,7 @@ def test_release_patch(tmp_path):
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         }
@@ -284,12 +284,12 @@ def test_release(tmp_path):
     assert list(parsed.keys()) == ["Unreleased", "0.0.1"]
     assert parsed == {
         "Unreleased": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": None,
             "version": "Unreleased",
         },
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         },
@@ -336,7 +336,7 @@ def test_add_added(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -354,7 +354,7 @@ def test_add_changed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "changed": ["- a changelog entry string"],
+            "changed": ["a changelog entry string"],
         }
     }
 
@@ -372,7 +372,7 @@ def test_add_deprecated(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "deprecated": ["- a changelog entry string"],
+            "deprecated": ["a changelog entry string"],
         }
     }
 
@@ -390,7 +390,7 @@ def test_add_fixed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "fixed": ["- a changelog entry string"],
+            "fixed": ["a changelog entry string"],
         }
     }
 
@@ -408,7 +408,7 @@ def test_add_security(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "security": ["- a changelog entry string"],
+            "security": ["a changelog entry string"],
         }
     }
 
@@ -426,7 +426,7 @@ def test_add_removed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "removed": ["- a changelog entry string"],
+            "removed": ["a changelog entry string"],
         }
     }
 
@@ -446,7 +446,7 @@ def test_add_entries(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -463,8 +463,8 @@ def test_add_entries(tmp_path):
             "version": "Unreleased",
             "release_date": None,
             "added": [
-                "- a changelog entry string",
-                "- an unquoted changelog entry string",
+                "a changelog entry string",
+                "an unquoted changelog entry string",
             ],
         }
     }
@@ -481,10 +481,10 @@ def test_add_entries(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "changed": ["- an unquoted changelog entry string"],
+            "changed": ["an unquoted changelog entry string"],
             "added": [
-                "- a changelog entry string",
-                "- an unquoted changelog entry string",
+                "a changelog entry string",
+                "an unquoted changelog entry string",
             ],
         }
     }
