@@ -37,7 +37,7 @@ TEMPLATE = Template(
 
 ### {{ section | title }}
 {% for entry in changes[section] %}
-{{ entry }}
+- {{ entry }}
 
 {%- endfor %}
 
