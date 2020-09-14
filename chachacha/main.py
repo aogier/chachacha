@@ -7,6 +7,7 @@ Created on 25 feb 2020
 import typing
 
 import click
+import semver
 from click.core import Context
 
 from chachacha import __version__, drivers
@@ -105,16 +106,24 @@ def security(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None
     driver.add_entry("security", changes)
 
 
-@main.command(help="release a version")
-@click.option("--major", "mode", flag_value="major", help="bump a major version")
-@click.option("--minor", "mode", flag_value="minor", help="bump a minor version")
-@click.option(
-    "--patch", "mode", flag_value="patch", help="bump a patch version", default=True
-)
-@click.pass_obj
-def release(driver: ChangelogFormat, mode: str) -> None:
+def _validate_version_spec(ctx, param, value):
+    if value in ["major", "minor", "patch"] or semver.VersionInfo.isvalid(value):
+        return value
+    else:
+        raise click.BadParameter("Invalid version specification")
 
-    driver.release(mode)
+
+@main.command(short_help="release a version")
+@click.argument("spec", default="patch", callback=_validate_version_spec)
+@click.pass_obj
+def release(driver: ChangelogFormat, spec: str) -> None:
+    """
+    Update the changelog to release version SPEC.
+
+    SPEC should either be the version number to release
+    or the strings "major", "minor" or "patch".
+    """
+    driver.release(spec)
 
 
 @main.command(help="configure changelog options")

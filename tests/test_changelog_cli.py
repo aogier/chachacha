@@ -26,7 +26,7 @@ def test_git_provider_missing_param(tmp_path):
         assert result.exit_code == 0, result.output
         result = runner.invoke(main.main, ["added", "a changelog entry string"])
         assert result.exit_code == 0, result.output
-        result = runner.invoke(main.main, ["release", "--major"])
+        result = runner.invoke(main.main, ["release", "major"])
         assert result.exit_code == 0, result.output
 
     changelog = open("CHANGELOG.md").read()
@@ -88,7 +88,7 @@ def test_git_provider(tmp_path):
         assert result.exit_code == 0
         result = runner.invoke(main.main, ["added", "a changelog entry string"])
         assert result.exit_code == 0
-        result = runner.invoke(main.main, ["release", "--major"])
+        result = runner.invoke(main.main, ["release", "major"])
         assert result.exit_code == 0
 
     changelog = open("CHANGELOG.md").read()
@@ -221,7 +221,7 @@ def test_release_major(tmp_path):
     runner.invoke(main.main, ["init"])
 
     runner.invoke(main.main, ["added", "a changelog entry string"])
-    result = runner.invoke(main.main, ["release", "--major"])
+    result = runner.invoke(main.main, ["release", "major"])
     assert result.exit_code == 0
 
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
@@ -240,7 +240,7 @@ def test_release_minor(tmp_path):
     runner.invoke(main.main, ["init"])
 
     runner.invoke(main.main, ["added", "a changelog entry string"])
-    result = runner.invoke(main.main, ["release", "--minor"])
+    result = runner.invoke(main.main, ["release", "minor"])
     assert result.exit_code == 0
 
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
@@ -260,7 +260,7 @@ def test_release_patch(tmp_path):
     runner.invoke(main.main, ["init"])
 
     runner.invoke(main.main, ["added", "a changelog entry string"])
-    result = runner.invoke(main.main, ["release", "--patch"])
+    result = runner.invoke(main.main, ["release", "patch"])
     assert result.exit_code == 0
 
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
@@ -271,6 +271,35 @@ def test_release_patch(tmp_path):
             "version": "0.0.1",
         }
     }
+
+
+def test_release_specfic(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    runner.invoke(main.main, ["added", "a changelog entry string"])
+    result = runner.invoke(main.main, ["release", "2.0.0"])
+    assert result.exit_code == 0, result.stdout
+
+    parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
+    assert parsed == {
+        "2.0.0": {
+            "added": ["- a changelog entry string"],
+            "release_date": datetime.now().isoformat().split("T")[0],
+            "version": "2.0.0",
+        }
+    }
+
+
+def test_release_invalid(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+    runner.invoke(main.main, ["init"])
+
+    runner.invoke(main.main, ["added", "a changelog entry string"])
+    result = runner.invoke(main.main, ["release", "invalid"])
+    assert result.exit_code != 0
 
 
 def test_release(tmp_path):

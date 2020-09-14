@@ -150,8 +150,10 @@ class ChangelogFormat:
             last = str(version.bump_major())
         elif mode == "minor":
             last = str(version.bump_minor())
-        else:
+        elif mode == "patch":
             last = str(version.bump_patch())
+        else:
+            last = mode
 
         entries = current.pop("Unreleased")
 
