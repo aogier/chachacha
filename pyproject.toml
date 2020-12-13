@@ -36,7 +36,7 @@ isort = "^4.3.21"
 pytest-cov = "^2.8.1"
 wheel = "^0.34.2"
 twine = "^3.1.1"
-pyinstaller = "^3.6"
+pyinstaller = "^4.1"
 pylint = "^2.5.3"
 
 [build-system]
