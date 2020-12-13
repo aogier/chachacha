@@ -285,7 +285,7 @@ def test_release_specfic(tmp_path):
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "2.0.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "2.0.0",
         }
