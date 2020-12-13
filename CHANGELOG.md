@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Allow specifying the version string directly - https://github.com/aogier/chachacha/issues/24
+- Allow specifying the version string directly, thanks to @milliams - https://github.com/aogier/chachacha/issues/24
 
 ## [0.1.6] - 2020-12-13
 
