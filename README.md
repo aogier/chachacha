@@ -66,22 +66,16 @@ Releasing a version is simple as:
 ```shell
 chachacha release --help
 
-Usage: chachacha release [OPTIONS]
+Usage: main.py release [OPTIONS] [SPEC]
 
-  release a version
+  Update the changelog to release version SPEC.
+
+  SPEC should either be the version number to release or the strings
+  "major", "minor" or "patch".
 
 Options:
-  --major  bump a major version
-  --minor  bump a minor version
-  --patch  bump a patch version
-  --help   Show this message and exit.
+  --help  Show this message and exit.
 ```
-
-Where:
-
-* major: release a major
-* minor: release a minor
-* patch: release a patch
 
 Specification follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 thanks to python [semver library](https://python-semver.readthedocs.io/en/latest/).
