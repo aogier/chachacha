@@ -9,8 +9,10 @@ python:
   - '3.8'
 
 install:
-  - sudo apt-get -y install upx-ucl
-  - pip install -U -r requirements-dev.txt
+  - sudo apt-get -y install upx-ucl curl
+  - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -2
+  - poetry export --dev > requirements.txt
+  - pip install -U -r requirements.txt
 
 script:
   - scripts/test -vv
