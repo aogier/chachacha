@@ -24,7 +24,7 @@ def test_kac_init(tmp_path):
 
     with open("CHANGELOG.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 
 def test_kac_init_overwrite(tmp_path, capsys):
@@ -44,7 +44,7 @@ def test_kac_init_overwrite(tmp_path, capsys):
     driver.init(overwrite=True)
 
     with open("FILENAME.md") as changelog:
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 
 def test_git_provider_missing_param(tmp_path):
@@ -101,7 +101,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 
 
-[//]: # (C3-1-DKAC-GGH-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -176,7 +176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
 
-[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Raogier/chachacha:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -251,7 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://gitlab.com/aogier/chachacha/-/compare/v1.0.0...v2.0.0
 [1.0.0]: https://gitlab.com/aogier/chachacha/-/tags/v1.0.0
 
-[//]: # (C3-1-DKAC-GGL-Raogier/chachacha-Tv{{t}})
+[//]: # (C3-2-DKAC:GGL:Raogier/chachacha:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -322,7 +322,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 
 
-[//]: # (C3-1-DKAC-GXX-Raogier/chachacha-Tv{{t}})
+[//]: # (C3-2-DKAC:GXX:Raogier/chachacha:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -379,7 +379,7 @@ def test_release_major(tmp_path):
     parsed = keepachangelog.to_dict(filename, show_unreleased=True)
     assert parsed == {
         "1.0.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "1.0.0",
         }
@@ -397,14 +397,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2020-02-28
+## [1.0.0] - {date}
 
 ### Added
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
-"""
+[//]: # (C3-2-DKAC)
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
     )
 
 
@@ -422,7 +424,7 @@ def test_release_minor(tmp_path):
     parsed = keepachangelog.to_dict(filename, show_unreleased=True)
     assert parsed == {
         "0.1.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.1.0",
         }
@@ -440,14 +442,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - 2020-02-28
+## [0.1.0] - {date}
 
 ### Added
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
-"""
+[//]: # (C3-2-DKAC)
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
     )
 
 
@@ -465,7 +469,7 @@ def test_release_patch(tmp_path):
     parsed = keepachangelog.to_dict(filename, show_unreleased=True)
     assert parsed == {
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         }
@@ -483,14 +487,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.1] - 2020-02-28
+## [0.0.1] - {date}
 
 ### Added
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
-"""
+[//]: # (C3-2-DKAC)
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
     )
 
 
@@ -509,12 +515,12 @@ def test_release(tmp_path):
     parsed = keepachangelog.to_dict(filename, show_unreleased=True)
     assert parsed == {
         "Unreleased": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": None,
             "version": "Unreleased",
         },
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         },
@@ -538,14 +544,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-## [0.0.1] - 2020-02-28
+## [0.0.1] - {date}
 
 ### Added
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
-"""
+[//]: # (C3-2-DKAC)
+""".format(
+            date=datetime.now().isoformat().split("T")[0]
+        )
     )
 
 
@@ -564,7 +572,7 @@ def test_add_added(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -586,7 +594,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -606,7 +614,7 @@ def test_add_changed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "changed": ["- a changelog entry string"],
+            "changed": ["a changelog entry string"],
         }
     }
 
@@ -628,7 +636,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -648,7 +656,7 @@ def test_add_deprecated(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "deprecated": ["- a changelog entry string"],
+            "deprecated": ["a changelog entry string"],
         }
     }
 
@@ -670,7 +678,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -690,7 +698,7 @@ def test_add_fixed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "fixed": ["- a changelog entry string"],
+            "fixed": ["a changelog entry string"],
         }
     }
 
@@ -712,7 +720,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -732,7 +740,7 @@ def test_add_security(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "security": ["- a changelog entry string"],
+            "security": ["a changelog entry string"],
         }
     }
 
@@ -754,7 +762,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -774,7 +782,7 @@ def test_add_removed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "removed": ["- a changelog entry string"],
+            "removed": ["a changelog entry string"],
         }
     }
 
@@ -796,7 +804,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
 
@@ -819,8 +827,8 @@ def test_add_entries(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "removed": ["- a changelog entry string", "- a changelog entry string"],
-            "added": ["- a changelog entry string"],
+            "removed": ["a changelog entry string", "a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -847,6 +855,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 - a changelog entry string
 
-[//]: # (C3-1-DKAC)
+[//]: # (C3-2-DKAC)
 """
     )
