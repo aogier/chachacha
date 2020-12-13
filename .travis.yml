@@ -8,6 +8,9 @@ python:
   - '3.7'
   - '3.8'
 
+services:
+  - docker
+
 install:
   - sudo apt-get -y install upx-ucl curl
   - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
@@ -15,7 +18,6 @@ install:
 
 script:
   - scripts/test -vv
-  - pyinstaller -s -F chachacha/main.py -n chachacha
 
 env:
   global:
@@ -33,6 +35,8 @@ after_script:
 
 deploy:
   - provider: releases
+    before_deploy:
+      - pyinstaller -s -F chachacha/main.py -n chachacha
     skip_cleanup: true
     api_key:
       secure: isyzqPx8WxC2J4ND+2f2wqx+lBtM2fqlxBofk1DpY10BEAA3o98zyCBc3fbjFjkGSakcfBKDLMOK3iSMj/yV4bxQboFT1BmNPbkFjMZIotuZ7kIsOvboYvlEGlVcYY6UL7YZtp3GCSsc/sDrrEmNmow+owhMuFBZsLOdwj1eLBwKv3rBBoqM3qI+QFvgzGHuDrBN7jeOWPx3zC6zZGG7sSPlT82vfR85h8FHKg1qsWnfZ8j+MW/SULDvd9ZwuRhwO6BOjgMmxbQh5ffSGhLtNXxcI7MKknVhkhxgWh/mekoyDSaYqqdqcuLpVYlNTIrT0JTvd2VaH1PzjBYyUchszVGM6SL0scFTdjulfsLbr0J04GvfGvqKV0ixwkabYgas80l4vgMBaaDYY5+Hm6UGeqnFx4/uECoXqOk8q+Lh9+8b5gPVMo8HCOsGb/X1tKUsCxTuF/6ZBvPLBQRfrdRFndr7H3drae4EcMHso+jFmuH9JLJq2I1nBmgWKcAIXlzh4SpQUhNKxkct9PdKYtNvFyL0R0uM94Ti8s4tRaISg5+6Rh/1aSRDT8RkwLOJxGVy/cOc6MnlOt3pxN8Tx2IaDUfd8n3QJMrlLKK4Z4LxkR+K30SzO/RaJiivgseQ9ckvQ3bvrVvou/8YJKnYTqSjbD+HzAbta93XgMDb4nCTzEs=
@@ -42,3 +46,10 @@ deploy:
   - provider: script
     script: ~/.poetry/bin/poetry build && twine upload -u __token__ dist/*whl --skip-existing
     <<: *deploy_condition
+
+  - provider: script
+    script: docker build -t aogier/chachacha .; echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin; docker push aogier/chachacha
+    on:
+      python: '3.7'
+      repo: aogier/chachacha
+      branch: feature/docker
