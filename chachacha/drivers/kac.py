@@ -123,7 +123,9 @@ class ChangelogFormat:
 
         section = unreleased.setdefault(section_name, [])
 
-        section.append(changelog_line if type(changelog_line) is str else ' '.join(changelog_line))
+        section.append(
+            changelog_line if type(changelog_line) is str else " ".join(changelog_line)
+        )
 
         self.write(current=current)
 
