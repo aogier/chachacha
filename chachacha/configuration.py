@@ -22,7 +22,7 @@ class Configuration:
         "T": "tag_template",
     }
 
-    version = 1
+    version = 2
     driver: str
     git_provider: str
     repo_name: str
@@ -34,7 +34,7 @@ class Configuration:
         for k, v in asdict(self).items():
             if v:
                 conf.append(f"{revmap[k]}{v}")
-        return f'{CONFIG_SIGNATURE}-{self.version}-{"-".join(sorted(conf))})'
+        return f'{CONFIG_SIGNATURE}-{self.version}-{":".join(sorted(conf))})'
 
     @staticmethod
     def empty():
@@ -44,8 +44,16 @@ class Configuration:
     def factory(line):
         *_, conf = line.split()
         # future use
-        # _, version, *args = conf.strip("()").split("-")
-        _, _, *args = conf.strip("()").split("-")
+        _, version, *_ = conf.strip("()").split("-")
+        if version == "1":
+            _, _, *args = conf.strip("()").split("-")
+        elif version == "2":
+            _, _, *args = conf.strip("()").split("-")
+            args = "-".join(args).split(":")
+        else:
+            raise ValueError(
+                f"Unknown chachacha config version {version!r}, expecting one of '1', '2'"
+            )
 
         configuration = {
             "driver": "",

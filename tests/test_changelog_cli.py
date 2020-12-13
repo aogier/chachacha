@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - a changelog entry string
 
 
-[//]: # (C3-1-DKAC-GGH-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -128,7 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.0]: https://github.com/aogier/chachacha/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/aogier/chachacha/releases/tag/v1.0.0
 
-[//]: # (C3-1-DKAC-GGH-Raogier/chachacha-Tv{{t}})
+[//]: # (C3-2-DKAC:GGH:Raogier/chachacha:Tv{{t}})
 """.format(
             date=datetime.now().isoformat().split("T")[0]
         )
@@ -168,6 +168,53 @@ def test_configuration(tmp_path):
     assert result.output == "driver=KACZ\ngit_provider=\nrepo_name=\ntag_template=\n"
 
 
+def test_configuration_parsing_version_1(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+
+    with open("CHANGELOG.md", "w", encoding="utf8") as changelog:
+        changelog.write(
+            """
+
+an example changelog.
+
+The only purpose of this is to see how well chachacha handles older configurations (version one)
+
+[//]: # (C3-1-DKAC-Rewenlbh/nohyphenshere-GGH-Tversion{t})
+
+"""
+        )
+
+    result = runner.invoke(main.main, ["config"])
+    assert result.exit_code == 0
+    assert (
+        result.output
+        == "driver=KAC\ngit_provider=GH\nrepo_name=ewenlbh/nohyphenshere\ntag_template=version{t}\n"
+    )
+
+
+def test_configuration_parsing_version_unvalid(tmp_path):
+    os.chdir(tmp_path)
+    runner = CliRunner()
+
+    with open("CHANGELOG.md", "w", encoding="utf8") as changelog:
+        changelog.write(
+            """
+
+an example changelog.
+
+The only purpose of this is to see how well chachacha handles unvalid configuration versions
+unvalid versions are also versions that haven't been released yet, so that the user is warned
+
+[//]: # (C3-42-DKAC-Rewenlbh/nohyphenshere-GGH-Tversion{t})
+
+"""
+        )
+
+    result = runner.invoke(main.main, ["config"])
+    assert result.exit_code != 0
+
+
 def test_release_major(tmp_path):
     os.chdir(tmp_path)
     runner = CliRunner()
@@ -180,7 +227,7 @@ def test_release_major(tmp_path):
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "1.0.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "1.0.0",
         }
@@ -200,7 +247,7 @@ def test_release_minor(tmp_path):
 
     assert parsed == {
         "0.1.0": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.1.0",
         }
@@ -219,7 +266,7 @@ def test_release_patch(tmp_path):
     parsed = keepachangelog.to_dict("CHANGELOG.md", show_unreleased=True)
     assert parsed == {
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         }
@@ -246,12 +293,12 @@ def test_release(tmp_path):
     assert list(parsed.keys()) == ["Unreleased", "0.0.1"]
     assert parsed == {
         "Unreleased": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": None,
             "version": "Unreleased",
         },
         "0.0.1": {
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
             "release_date": datetime.now().isoformat().split("T")[0],
             "version": "0.0.1",
         },
@@ -267,7 +314,7 @@ def test_file_creation(tmp_path):
 
     with open("CHANGELOG.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
     with open("FILENAME.md", "w") as changelog:
         changelog.write("foo")
@@ -282,7 +329,7 @@ def test_file_creation(tmp_path):
 
     with open("FILENAME.md") as changelog:
 
-        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-1-DKAC)\n"
+        assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 
 def test_add_added(tmp_path):
@@ -298,7 +345,7 @@ def test_add_added(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -316,7 +363,7 @@ def test_add_changed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "changed": ["- a changelog entry string"],
+            "changed": ["a changelog entry string"],
         }
     }
 
@@ -334,7 +381,7 @@ def test_add_deprecated(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "deprecated": ["- a changelog entry string"],
+            "deprecated": ["a changelog entry string"],
         }
     }
 
@@ -352,7 +399,7 @@ def test_add_fixed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "fixed": ["- a changelog entry string"],
+            "fixed": ["a changelog entry string"],
         }
     }
 
@@ -370,7 +417,7 @@ def test_add_security(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "security": ["- a changelog entry string"],
+            "security": ["a changelog entry string"],
         }
     }
 
@@ -388,7 +435,7 @@ def test_add_removed(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "removed": ["- a changelog entry string"],
+            "removed": ["a changelog entry string"],
         }
     }
 
@@ -408,7 +455,7 @@ def test_add_entries(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "added": ["- a changelog entry string"],
+            "added": ["a changelog entry string"],
         }
     }
 
@@ -425,8 +472,8 @@ def test_add_entries(tmp_path):
             "version": "Unreleased",
             "release_date": None,
             "added": [
-                "- a changelog entry string",
-                "- an unquoted changelog entry string",
+                "a changelog entry string",
+                "an unquoted changelog entry string",
             ],
         }
     }
@@ -443,10 +490,10 @@ def test_add_entries(tmp_path):
         "Unreleased": {
             "version": "Unreleased",
             "release_date": None,
-            "changed": ["- an unquoted changelog entry string"],
+            "changed": ["an unquoted changelog entry string"],
             "added": [
-                "- a changelog entry string",
-                "- an unquoted changelog entry string",
+                "a changelog entry string",
+                "an unquoted changelog entry string",
             ],
         }
     }

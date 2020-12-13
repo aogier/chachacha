@@ -37,7 +37,7 @@ TEMPLATE = Template(
 
 ### {{ section | title }}
 {% for entry in changes[section] %}
-{{ entry }}
+- {{ entry }}
 
 {%- endfor %}
 
@@ -108,7 +108,6 @@ class ChangelogFormat:
         self, section_name: str, changelog_line: typing.Union[str, tuple]
     ) -> None:
 
-        _changelog_line = "- " + " ".join(changelog_line)
         current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
         unreleased = current.get("Unreleased")
@@ -124,7 +123,9 @@ class ChangelogFormat:
 
         section = unreleased.setdefault(section_name, [])
 
-        section.append(_changelog_line)
+        section.append(
+            changelog_line if type(changelog_line) is str else " ".join(changelog_line)
+        )
 
         self.write(current=current)
 
@@ -143,7 +144,7 @@ class ChangelogFormat:
         except IndexError:
             last = "0.0.0"
 
-        version = semver.parse_version_info(last)
+        version = semver.VersionInfo.parse(last)
 
         if mode == "major":
             last = str(version.bump_major())
