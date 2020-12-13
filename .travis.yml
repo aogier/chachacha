@@ -11,7 +11,7 @@ python:
 install:
   - sudo apt-get -y install upx-ucl curl
   - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-  - poetry export --dev > requirements.txt
+  - ~/.poetry/bin/poetry export --dev > requirements.txt
   - pip install -U -r requirements.txt
 
 script:
