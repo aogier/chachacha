@@ -19,6 +19,12 @@ jobs:
         run: |
           sudo apt-get -y install curl
           curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+
+      - name: install dependencies
+        run: ~/.poetry/bin/poetry install
+
+      - name: run tests
+        run: scripts/test -vv
   # # Set the job key. The key is displayed as the job name
   # # when a job name is not provided
   # super-lint:
