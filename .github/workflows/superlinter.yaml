@@ -31,7 +31,10 @@ jobs:
         run: ~/.poetry/bin/poetry install
 
       - name: run tests
-        run: ~/.poetry/bin/poetry scripts/test -vv
+        run: ~/.poetry/bin/poetry run scripts/test -vv
+
+      - name: send coverage report
+        run: pip install codecov && codecov
   # # Set the job key. The key is displayed as the job name
   # # when a job name is not provided
   # super-lint:
