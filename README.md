@@ -12,15 +12,8 @@ specification which is the most implemented plugin at the moment.
 
 ## Installation
 
-Grab latest copy from [releases page](https://github.com/aogier/chachacha/releases)
-and place it where you can invoke it.
-
-Alternatively you can choose to install Python package and cope with `$PATH` configuration.
-
 ```console
-$ pip install chachacha
-
-...
+pip install chachacha
 ```
 
 ## Quickstart
