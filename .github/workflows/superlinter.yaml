@@ -31,7 +31,7 @@ jobs:
         run: ~/.poetry/bin/poetry install
 
       - name: run tests
-        run: scripts/test -vv
+        run: ~/.poetry/bin/poetry scripts/test -vv
   # # Set the job key. The key is displayed as the job name
   # # when a job name is not provided
   # super-lint:
