@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - removed useless dev dependencies
 - bumped pyinstaller version
 - bumped jinja, black dependencies
+- unvendored dataclasses
 
 ### Fixed
 

@@ -1,4 +1,5 @@
 import os
+from dataclasses import asdict
 from datetime import datetime
 
 import keepachangelog
@@ -8,11 +9,6 @@ from click.testing import CliRunner
 from chachacha import drivers, main
 from chachacha.configuration import CONFIG_SIGNATURE
 from chachacha.drivers.kac import DEFAULT_HEADER
-
-try:
-    from dataclasses import asdict
-except ImportError:  # pragma: no cover
-    from chachacha.vendor_dataclasses import asdict
 
 
 def test_kac_init(tmp_path):

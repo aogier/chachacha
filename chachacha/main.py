@@ -5,6 +5,7 @@ Created on 25 feb 2020
 """
 
 import typing
+from dataclasses import asdict
 
 import click
 import semver
@@ -12,11 +13,6 @@ from click.core import Context
 
 from chachacha import __version__, drivers
 from chachacha.drivers.kac import ChangelogFormat
-
-try:
-    from dataclasses import asdict
-except ImportError:  # pragma: no cover
-    from .vendor_dataclasses import asdict
 
 
 class CCCGroup(click.Group):  # pragma: no cover
