@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - minimum python version is now 3.6 instead of 3.7
 - removed useless dev dependencies
 - bumped pyinstaller version
+- bumped jinja, black dependencies
 
 ### Fixed
 
