@@ -1,0 +1,10 @@
+.coverage
+.github
+.gitignore
+.mypy_cache
+.pytest_cache
+.python-version
+CHANGELOG.md
+Dockerfile
+coverage.xml
+dist

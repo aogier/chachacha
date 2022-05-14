@@ -7,7 +7,18 @@ fi
 
 set -x
 
-${PREFIX}autoflake --in-place --recursive chachacha tests setup.py
-${PREFIX}black chachacha tests setup.py
-${PREFIX}isort --multi-line=3 --trailing-comma --force-grid-wrap=0 --combine-as --line-width 88 --recursive --apply chachacha tests setup.py
+${PREFIX}autoflake \
+    --in-place \
+    --recursive \
+    chachacha tests
+
+${PREFIX}black chachacha tests
+${PREFIX}isort \
+    --multi-line=3 \
+    --trailing-comma \
+    --force-grid-wrap=0 \
+    --combine-as \
+    --line-width 88 \
+    chachacha tests
+
 #${PREFIX}mypy chachacha --ignore-missing-imports --disallow-untyped-defs

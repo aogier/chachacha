@@ -13,7 +13,6 @@ classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Topic :: Internet :: WWW/HTTP",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
 ]
@@ -22,22 +21,22 @@ classifiers = [
 chachacha = "chachacha.main:main"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 keepachangelog = "^0.3.1"
-click = "^7.0"
-jinja2 = "^2.11.1"
-poetry-version = "^0.1.5"
+click = "^8.1.0"
+jinja2 = "^3.1.0"
 semver = "^2.9.1"
 
 [tool.poetry.dev-dependencies]
-pytest = "^4.6"
-mypy = "^0.761"
-black = "^19.10b0"
-autoflake = "^1.3.1"
-isort = "^4.3.21"
-pytest-cov = "^2.8.1"
+pytest = "^7"
+mypy = "^0.950"
+black = "^22"
+autoflake = "^1.4"
+pytest-cov = "^3"
 pyinstaller = "^4.1"
 pylint = "^2.5.3"
+codecov = "^2.1.12"
+
 
 [build-system]
 requires = ["poetry>=0.12"]

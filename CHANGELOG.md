@@ -10,12 +10,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - more badges in readme
+- github actions
+- dependabot
 
 ### Changed
 
 - minimum python version is now 3.6 instead of 3.7
 - removed useless dev dependencies
 - bumped pyinstaller version
+- bumped various dependencies
+
+### Removed
+
+- travis-ci
+- python3.6 support, unvendored dataclasses
 
 ### Fixed
 

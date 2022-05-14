@@ -10,7 +10,23 @@ export PYTHON_VERSION=`python -c "$VERSION_SCRIPT"`
 
 set -x
 
-PYTHONPATH=. ${PREFIX}pytest --ignore venv -W ignore::DeprecationWarning --cov=chachacha --cov=tests --cov-fail-under=100 --cov-report=term-missing ${@}
+PYTHONPATH=. ${PREFIX}pytest \
+    --ignore venv \
+    -W ignore::DeprecationWarning \
+    --cov-report=xml \
+    --cov=chachacha \
+    --cov=tests \
+    --cov-fail-under=100 \
+    --cov-report=term-missing ${@}
+
 #${PREFIX}mypy chachacha --ignore-missing-imports --disallow-untyped-defs
-${PREFIX}autoflake --recursive chachacha tests
-${PREFIX}black chachacha tests --check --exclude vendor_dataclasses.py
+
+${PREFIX}autoflake \
+    --recursive \
+    chachacha \
+    tests
+
+${PREFIX}black \
+    chachacha \
+    tests \
+    --check
