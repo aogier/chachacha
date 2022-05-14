@@ -4,7 +4,8 @@ FROM aogier/python-poetry:py${PYTHON_VERSION}-gcc as poetry
 WORKDIR /srv
 COPY . .
 
-RUN set -x; . $HOME/.poetry/env \
+RUN set -x \
+    && . $HOME/.poetry/env \
     && poetry config virtualenvs.create false \
     && poetry install
 
@@ -20,7 +21,8 @@ ARG GIT_SHA
 
 COPY --from=test /srv/coverage.xml .
 
-RUN . $HOME/.poetry/env \
+RUN set -x \
+    && . $HOME/.poetry/env \
     && poetry publish --build \
         --username __token__ \
         --password $PYPI_TOKEN \
