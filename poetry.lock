@@ -228,14 +228,14 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "keepachangelog"
-version = "0.3.1"
-description = "Convert changelog into dict."
+version = "0.5.0"
+description = "Manipulate keep a changelog files."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.extras]
-testing = ["pytest-cov (>=2.0.0,<3.0.0)", "requests (>=2.0.0,<3.0.0)", "starlette (>=0.13.0,<0.14.0)"]
+testing = ["flask-restx (>=0.2.0,<0.3.0)", "pytest-cov (>=2.0.0,<3.0.0)", "requests", "starlette (>=0.13.0,<0.14.0)"]
 
 [[package]]
 name = "lazy-object-proxy"
@@ -569,7 +569,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "aa6cbaa4b5be4480aaf554cbd4bc1c69232f9f5f0a3e3a30ffbb667b05b61540"
+content-hash = "41424d09da5a2c021e74af4d977c5f3343e61cecd3b82bb0ad29cc6662889e90"
 
 [metadata.files]
 altgraph = [
@@ -706,8 +706,8 @@ jinja2 = [
     {file = "Jinja2-3.1.2.tar.gz", hash = "sha256:31351a702a408a9e7595a8fc6150fc3f43bb6bf7e319770cbc0db9df9437e852"},
 ]
 keepachangelog = [
-    {file = "keepachangelog-0.3.1-py3-none-any.whl", hash = "sha256:d63e302114a57287f90a44b38945072af9c425418d2c7a0e66f5b0c44264daf2"},
-    {file = "keepachangelog-0.3.1.tar.gz", hash = "sha256:d53b77d9d4d8635af8487548a4fefb8a135003b243dafb94b24b6b0ff435ab89"},
+    {file = "keepachangelog-0.5.0-py3-none-any.whl", hash = "sha256:dc7e223363b5a8ca17a7fba757db6ccfd2f2f43dfeba0448e3be9aec674a6b22"},
+    {file = "keepachangelog-0.5.0.tar.gz", hash = "sha256:7e06be8f364bf141cc8f6788e0647e00560f26684fabac83cf8229e21975a288"},
 ]
 lazy-object-proxy = [
     {file = "lazy-object-proxy-1.7.1.tar.gz", hash = "sha256:d609c75b986def706743cdebe5e47553f4a5a1da9c5ff66d76013ef396b5a8a4"},
