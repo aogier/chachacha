@@ -101,13 +101,11 @@ class ChangelogFormat:
             ctx["config"] = config.marshal()
 
         with open(self.filename, "w") as outfile:
-
             outfile.write(TEMPLATE.render(ctx) + "\n")
 
     def add_entry(
         self, section_name: str, changelog_line: typing.Union[str, tuple]
     ) -> None:
-
         current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
         unreleased = current.get("Unreleased")
@@ -130,7 +128,6 @@ class ChangelogFormat:
         self.write(current=current)
 
     def release(self, mode: str) -> None:
-
         current = keepachangelog.to_dict(self.filename, show_unreleased=True)
 
         if "Unreleased" not in current:
@@ -164,7 +161,6 @@ class ChangelogFormat:
         self.write(current=changelog)
 
     def get_config(self, *, init=False):
-
         try:
             with open(self.filename) as changelog:
                 for line in changelog:

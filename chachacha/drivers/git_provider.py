@@ -20,12 +20,10 @@ PROVIDERS = {
 
 class Provider:
     def __init__(self, changelog, config):
-
         self.changelog = changelog
         self.config = config
 
     def compare(self):
-
         last = "HEAD"
         self.changelog.pop("Unreleased", None)
         # xxx: emit warning?
