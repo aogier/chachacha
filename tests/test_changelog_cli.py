@@ -342,7 +342,6 @@ def test_file_creation(tmp_path):
     assert result.exit_code == 0
 
     with open("CHANGELOG.md") as changelog:
-
         assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
     with open("FILENAME.md", "w") as changelog:
@@ -357,7 +356,6 @@ def test_file_creation(tmp_path):
     assert result.exit_code == 0
 
     with open("FILENAME.md") as changelog:
-
         assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 

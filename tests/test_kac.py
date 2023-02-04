@@ -23,7 +23,6 @@ def test_kac_init(tmp_path):
     driver.init()
 
     with open("CHANGELOG.md") as changelog:
-
         assert changelog.read() == DEFAULT_HEADER + "\n\n[//]: # (C3-2-DKAC)\n"
 
 
@@ -48,7 +47,6 @@ def test_kac_init_overwrite(tmp_path, capsys):
 
 
 def test_git_provider_missing_param(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -65,7 +63,6 @@ def test_git_provider_missing_param(tmp_path):
     driver.write(config=config)
 
     for _ in range(3):
-
         driver.add_entry("added", "a changelog entry string")
         driver.add_entry("added", "a changelog entry string")
         driver.release("major")
@@ -109,7 +106,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_git_provider_full_config(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -128,7 +124,6 @@ def test_git_provider_full_config(tmp_path):
     driver.write(config=config)
 
     for _ in range(3):
-
         driver.add_entry("added", "a changelog entry string")
         driver.add_entry("added", "a changelog entry string")
         driver.release("major")
@@ -184,7 +179,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_git_provider_gitlab(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -203,7 +197,6 @@ def test_git_provider_gitlab(tmp_path):
     driver.write(config=config)
 
     for _ in range(3):
-
         driver.add_entry("added", "a changelog entry string")
         driver.add_entry("added", "a changelog entry string")
         driver.release("major")
@@ -259,7 +252,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_git_provider_unknown(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -278,7 +270,6 @@ def test_git_provider_unknown(tmp_path):
     driver.write(config=config)
 
     for _ in range(3):
-
         driver.add_entry("added", "a changelog entry string")
         driver.add_entry("added", "a changelog entry string")
         driver.release("major")
@@ -330,7 +321,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_configuration(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -366,7 +356,6 @@ def test_configuration(tmp_path):
 
 
 def test_release_major(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -411,7 +400,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_release_minor(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -456,7 +444,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_release_patch(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -501,7 +488,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_release(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 
@@ -810,7 +796,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 def test_add_entries(tmp_path):
-
     os.chdir(tmp_path)
     filename = "CHANGELOG.md"
 

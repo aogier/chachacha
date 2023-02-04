@@ -40,7 +40,6 @@ class CCCGroup(click.Group):  # pragma: no cover
 @click.option("--driver", default="kac", help="changelog format driver")
 @click.pass_context
 def main(ctx: Context, filename: str, driver: str) -> None:
-
     driver = drivers.kac.ChangelogFormat(filename)
 
     ctx.obj = driver
@@ -50,7 +49,6 @@ def main(ctx: Context, filename: str, driver: str) -> None:
 @click.option("--overwrite", default=False, help="overwrite", is_flag=True)
 @click.pass_obj
 def init(driver: ChangelogFormat, overwrite: bool) -> None:
-
     driver.init(overwrite)
 
 
@@ -58,7 +56,6 @@ def init(driver: ChangelogFormat, overwrite: bool) -> None:
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def added(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("added", changes)
 
 
@@ -66,7 +63,6 @@ def added(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def changed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("changed", changes)
 
 
@@ -74,7 +70,6 @@ def changed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def deprecated(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("deprecated", changes)
 
 
@@ -82,7 +77,6 @@ def deprecated(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> No
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def removed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("removed", changes)
 
 
@@ -90,7 +84,6 @@ def removed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def fixed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("fixed", changes)
 
 
@@ -98,7 +91,6 @@ def fixed(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
 @click.pass_obj
 @click.argument("changes", nargs=-1)
 def security(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None:
-
     driver.add_entry("security", changes)
 
 
@@ -131,7 +123,6 @@ def release(driver: ChangelogFormat, spec: str) -> None:
 def config(
     driver: ChangelogFormat, _global: bool, show: bool, key: str, value: str
 ) -> None:
-
     config = driver.get_config(init=True)
 
     if not key:

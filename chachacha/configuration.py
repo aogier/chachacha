@@ -11,7 +11,6 @@ CONFIG_SIGNATURE = "[//]: # (C3"
 
 @dataclass
 class Configuration:
-
     conf_map = {
         "D": "driver",
         "G": "git_provider",
