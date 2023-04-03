@@ -95,7 +95,7 @@ def security(driver: ChangelogFormat, changes: typing.Union[str, tuple]) -> None
 
 
 def _validate_version_spec(ctx, param, value):
-    if value in ["major", "minor", "patch"] or semver.VersionInfo.isvalid(value):
+    if value in ["major", "minor", "patch"] or semver.VersionInfo.is_valid(value):
         return value
     else:
         raise click.BadParameter("Invalid version specification")

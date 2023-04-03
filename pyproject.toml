@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "chachacha"
 description = "Chachacha changes changelogs"
-version = "0.2.2"
+version = "0.2.3"
 authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
 readme = "README.md"
 license = "BSD"
@@ -25,7 +25,7 @@ python = "^3.7"
 keepachangelog = "^0.3.1"
 click = "^8.1.0"
 jinja2 = "^3.1.0"
-semver = "^2.9.1"
+semver = "^3.0.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7"
