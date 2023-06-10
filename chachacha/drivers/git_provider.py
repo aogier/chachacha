@@ -12,8 +12,8 @@ PROVIDERS = {
     },
     "GL": {
         "desc": "Gitlab.com template",
-        "compare": "https://gitlab.com/{repo_name}/-/compare/{new}...{old}",
-        "tag": "https://gitlab.com/{repo_name}/-/tags/{tag}",
+        "compare": "https://{host}/{repo_name}/-/compare/{new}...{old}",
+        "tag": "https://{host}/{repo_name}/-/tags/{tag}",
     },
 }
 
@@ -39,9 +39,12 @@ class Provider:
                 repo_name=self.config.repo_name,
                 new=self.config.tag_template.format(t=release),
                 old=self.config.tag_template.format(t=last) if last != "HEAD" else last,
+                host=self.config.host or "gitlab.com",
             )
             last = release
 
         yield last, PROVIDERS[self.config.git_provider]["tag"].format(
-            repo_name=self.config.repo_name, tag=self.config.tag_template.format(t=last)
+            repo_name=self.config.repo_name,
+            tag=self.config.tag_template.format(t=last),
+            host=self.config.host or "gitlab.com",
         )

@@ -16,6 +16,7 @@ class Configuration:
         "G": "git_provider",
         "R": "repo_name",
         "T": "tag_template",
+        "H": "host",
     }
 
     version = 2
@@ -23,6 +24,7 @@ class Configuration:
     git_provider: str
     repo_name: str
     tag_template: str
+    host: str
 
     def marshal(self):
         revmap = {v: k for k, v in self.conf_map.items()}
@@ -56,6 +58,7 @@ class Configuration:
             "git_provider": "",
             "repo_name": "",
             "tag_template": "",
+            "host": "",
         }
 
         for arg in args:
