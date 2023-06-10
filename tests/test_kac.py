@@ -352,6 +352,7 @@ def test_configuration(tmp_path):
         "git_provider": "",
         "repo_name": "",
         "tag_template": "",
+        "host": "",
     } == asdict(config)
 
 

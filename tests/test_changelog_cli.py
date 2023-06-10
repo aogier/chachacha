@@ -165,7 +165,10 @@ def test_configuration(tmp_path):
     result = runner.invoke(main.main, ["config"])
     assert result.exit_code == 0
 
-    assert result.output == "driver=KACZ\ngit_provider=\nrepo_name=\ntag_template=\n"
+    assert (
+        result.output
+        == "driver=KACZ\ngit_provider=\nrepo_name=\ntag_template=\nhost=\n"
+    )
 
 
 def test_configuration_parsing_version_1(tmp_path):
@@ -189,7 +192,7 @@ The only purpose of this is to see how well chachacha handles older configuratio
     assert result.exit_code == 0
     assert (
         result.output
-        == "driver=KAC\ngit_provider=GH\nrepo_name=ewenlbh/nohyphenshere\ntag_template=version{t}\n"
+        == "driver=KAC\ngit_provider=GH\nrepo_name=ewenlbh/nohyphenshere\ntag_template=version{t}\nhost=\n"
     )
 
 
