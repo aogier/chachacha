@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "chachacha"
 description = "Chachacha changes changelogs"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
 readme = "README.md"
 license = "BSD"
