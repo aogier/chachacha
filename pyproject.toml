@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "chachacha"
 description = "Chachacha changes changelogs"
-version = "0.2.4"
+version = "0.3.0"
 authors = ["Alessandro Ogier <alessandro.ogier@gmail.com>"]
 readme = "README.md"
 license = "BSD"
@@ -21,7 +21,7 @@ classifiers = [
 chachacha = "chachacha.main:main"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 keepachangelog = "^0.3.1"
 click = "^8.1.0"
 jinja2 = "^3.1.0"
