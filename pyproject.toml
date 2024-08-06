@@ -30,7 +30,7 @@ semver = "^3.0.0"
 [tool.poetry.dev-dependencies]
 pytest = "^7"
 mypy = "^1.7"
-black = "^23"
+black = "^24.0.0"
 autoflake = "^2.2"
 pytest-cov = "^4"
 pyinstaller = "^4.1"
