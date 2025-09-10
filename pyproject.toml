@@ -33,7 +33,7 @@ mypy = "^1.7"
 black = "^23"
 autoflake = "^2.2"
 pytest-cov = "^4"
-pyinstaller = "^4.1"
+pyinstaller = "^6.0.0"
 pylint = "^3.0.1"
 codecov = "^2.1.12"
 
